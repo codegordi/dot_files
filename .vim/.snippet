@@ -1,0 +1,64 @@
+snippet ipy
+        import IPython; IPython.embed()
+snippet ipyx
+        import IPython ; IPython.embed() ; import sys ; sys.exit()
+snippet exit
+        import sys ; sys.exit()
+snippet name
+        ${1}
+        if __name__ == '__main__':
+            NS = build_arg_parser().parse_args()
+            main(NS)
+snippet dsinit
+        from ds_commons import argparse_tools as at${1}
+
+
+        def main(ns):
+            ${3}
+
+
+        build_arg_parser = at.build_arg_parser([
+            ${2}
+        ])
+
+
+        if __name__ == '__main__':
+            NS = build_arg_parser().parse_args()
+            main(NS)
+snippet igm
+        import gevent.monkey ; gevent.monkey.patch_all()
+        ${1}
+snippet iat
+        from ds_commons import argparse_tools as at
+        ${1}
+snippet idt
+        from ds_commons import data_tools
+        ${1}
+snippet idbt
+        from ds_commons import db_tools
+        ${1}
+snippet icb
+        from ds_commons import config_base
+        ${1}
+snippet ilog
+        from ds_commons.log import log
+        ${1}
+snippet info
+        log.info(${1})
+        ${2}
+snippet debug
+        log.debug(${1})
+        ${2}
+snippet warn
+        log.warn(${1})
+        ${2}
+snippet critical
+        log.critical(${1})
+        ${2}
+snippet err
+        log.error(${1})
+        ${2}
+snippet exc
+        log.exception(${1})
+        ${2}
+

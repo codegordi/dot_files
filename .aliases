@@ -1,0 +1,34 @@
+## aliases
+
+# dir stuff
+alias la="ls -laph"
+# alias gw="ssh <gateway server>"
+
+#backup
+## TODO : Install local Dropbox (?)
+#alias backup-library='rsync  -av  --stats ~/Library ~/Dropbox/Library-$(date +%s)'
+
+# git
+alias glog='git log --decorate --color'
+alias gloga='glog --author=cgutierrez'
+alias gstat='git status' # --decorate --color'
+alias gpush='git push --rebase'
+alias gpushum='gpush upstream master'
+
+# grep
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+# misc
+alias vi='vim'
+alias updvim='vim -u ~/.vim/.vimrc +BundleInstall! +q'
+alias norris='echo "    \\  Chuck Norris never goes to the dentist because his teeth are unbreakable. \\
+             His enemies never go to the dentist because they have no teeth."'
+
+# python
+alias ipy="ipython"
+
+PYTHONPATH=~/ds:$PYTHONPATH
+
+## >>> from here down moved back to dot_files/bash_sailthru

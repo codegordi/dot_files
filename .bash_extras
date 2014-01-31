@@ -1,0 +1,228 @@
+######
+# ENV VARS
+######
+
+### cmg : copied over from Alex Gaudio .bash_extras
+### : %s/alex/christina/g
+### : %s/alexgaudio/christinagutierrez/g
+
+export CDPATH="~:$CDPATH"
+export EDITOR=vim
+export HISTFILESIZE=10000
+export HISTSIZE=5000
+export PATH=~/bbin:~/bin:$PATH
+export PYTHONSTARTUP=~/.pythonrc.py
+
+export PYTHONPATH=.:$HOME/bin:$HOME:$PYTHONPATH
+
+# Cuda ENV
+export PATH=$PATH:/usr/local/cuda/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/lib
+
+
+##available_virtualenvs="${$(workon|tr -s '\n' '|')%?}"     # cmg [23jan14]: gives error BAD SUBSTITUTION; need zsh for this to work
+### -bash: ${$(workon|tr -s '\n' '|')%?}: bad substitution
+available_virtualenvs="$(workon | paste -sd '|' -)"
+user_workon=false
+
+function reactivate() {
+  echo "--> auto-execution of cmd, 'workon {env}' re-enabled"
+  user_workon=false
+}
+
+workon_virtualenv() {
+  # Automatically call "workon some_virtualenv" if current directory shares the same name as one of your virtualenvs
+  # and deactivate virtualenv if current directory path does not have ".../some_virtualenv/..." in its path
+  #
+  # If user explicitly calls workon or deactivate, stop auto-selecting virtual environments.
+  # The "reactivate" will let this function start auto-selecting virtual environments again.
+  #
+  # If configured properly, this function is called every time you hit enter on the command line.
+  # It assumes that two global variables are defined:
+  #  - user_workon=true|false
+  #  - current_command - the most recent line entered into the shell.  You need this global variable to be updated
+  #  by your shell.  In bash, that's via the PROMPT_COMMAND.  In zsh, you register a precmd hook.
+  #    - If you don't know how to do this, you can look lower in this file for how I've implemented it.
+
+  # Figure out what to do if this function is currently disabled, and if it is being turned off
+  local last_command="$(fc -ln -1)"
+  if [[ "$last_command" =~ mkvirtualenv\ \s+ ]] ; then
+    available_virtualenvs="$(workon|paste -sd '|' -)" # see line18 change to accom MacOS v. of paste()
+  fi
+  if [[ "$user_workon" = "false" && ! "$current_command"  =~ \ reactivate([ \|\;]|$) ]] ; then
+    # does last command include "workon XXX" or "deactivate"?
+    [[ "$current_command" =~ workon\ (${available_virtualenvs})([ \|\;]|$) ]] && matches_workon=true || matches_workon=false
+    [[ "$current_command" =~ deactivate([ \|\;]|$) ]] && matches_deactivate=true || matches_deactivate=false
+    if [[ "$matches_workon" = "true"  || "$matches_deactivate" = "true" ]] ; then
+      echo "--> automatic virtualenv selection disabled. Typing 'reactivate' will re-enable this feature"
+      user_workon=true
+      return
+    fi
+  elif [ "$user_workon" = "true" ] ; then
+    return
+  else
+    echo "unrecognized value for \$user_workon: \"$user_workon\"!"
+  fi
+
+  # Determine whether to change virtualenv
+  current_dir="${PWD##*/}"
+  venv="${VIRTUAL_ENV##*/}"
+  # if pwd_is_not_subdir_of_current_venv, then...
+  if [[ ! "$PWD" =~ \/$venv(\/|$) ]]; then
+    if [[ "$venv" != "" ]] ; then
+       deactivate && echo "--> deactivate ${venv}"
+    fi
+    if [[ "$current_dir" =~ ^($available_virtualenvs)$ ]] ; then
+      workon $current_dir 2>&1 && echo "--> workon $current_dir"
+      basedir_for_virtualenv="$PWD"
+    fi
+  # elif currently working on a virtual env and pwd isn't a subdir of the workon home dir, then...
+  elif [[ "$venv" != "" && "$PWD" != "$basedir_for_virtualenv"* ]] ; then
+    # if the directory you've declared workon in is not a parent of the current directory, deactivate
+    echo '--> deactivate'
+    deactivate
+  fi
+}
+
+__my_ps1() {
+  # The actual PS1 definition
+  if [[ "$VIRTUAL_ENV" != "" ]] ; then
+    echo -n "\n${cyan_bold}(${VIRTUAL_ENV##*/})"
+  fi
+  echo -n "\n${imposter}${cyan}${date_} | ${gray}${pwd} | ${git_status_color}${git_branch} | ${gray}`hostname`"
+  #echo -n "${white} | $(history |tail -n 1 | cut -d ' ' -f 3-20 | realiaser)"
+  echo -n "\n${stoplight_color} \$ ${white}"
+}
+
+_my_ps1() {
+  if test "$BASH" ; then
+    # COLORS!!!
+    local blue="\[\033[1;34m\]"
+    local cyan="\[\033[2;36m\]"
+    local cyan_bold="\[\033[1;36m\]"
+    local gray="\[\033[0;37m\]"
+    local green="\[\033[0;32m\]"
+    local green_bold="\[\033[1;32m\]"
+    local orange="\[\033[0;93m\]"  # not on all terminals
+    local purple="\[\033[0;35m\]"
+    local red="\[\033[0;31m\]"
+    local white="\[\033[0m\]"
+    local yellow="\[\033[0;33m\]"
+    local date_="\d \A"
+    local host="\h"
+    local pwd="\w"
+  else  # zsh
+    local blue="%{$fg[blue]%}"
+    local cyan="%{$fg[cyan]%}"
+    local cyan_bold="%{$fg_bold[cyan]%}"
+    local gray="%{$fg_no_bold[white]%}"
+    local green="%{$fg[green]%}"
+    local green_bold="%{$fg_bold[green]%}"
+    local orange="%{$fg_no_bold[yellow]%}"
+    local purple="%{$fg_no_bold[yellow]%}"
+    local red="%{$fg[red]%}"
+    local white="%{$fg[white]%}"
+    local yellow="%{$fg[yellow]%}"
+    local date_="%D{%m-%d %H:%m:%S}"
+    local host="%M"
+    local pwd="%~"
+  fi
+
+  # am I currently logged in as my default user?
+  me=(me christina christinagutierrez)
+  local isme="$(grep " "$(whoami)" " <(echo ${me[@]:0}) >/dev/null ; echo $?)"
+  local imposter="\$(if [[ ""$isme"" -ne "0" ]]; then echo \"${purple}($(whoami)) | \"; fi )"
+
+  # change colors based on success of last command
+  local last_rv=$?
+  if [ $last_rv = 0 ] ; then
+    local stoplight_color="${green}"
+  else
+    local stoplight_color="${red}"
+  fi
+
+  local git_status="`git status -sb 2>&1`"
+  if [[ "$git_status" =~ .*[^\ ]MM\  ]] ; then
+    #MM
+    local git_status_color=${red}
+  elif [[ "$git_status" =~ .*[^\ ]M\ \  ]] ; then
+    local git_status_color=${orange}
+    #M 
+  elif [[ "$git_status" =~ .*[^\ ]\ M\  ]] ; then
+    local git_status_color=${yellow}
+     #M
+  elif [[ "$git_status" =~ .*[^\ ]\\?\\?\  ]] ; then
+    #??
+    local git_status_color=${green_bold}
+  else
+    #clean
+    local git_status_color=${green}
+  fi
+  # Set git branch
+  git_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "no git")
+
+  __my_ps1
+}
+
+function _prompt_command() {
+    # execute hooks
+    workon_virtualenv
+    PS1="`_my_ps1`"
+}
+
+preexec_invoke_exec () {
+  # thank you to:
+  # http://superuser.com/questions/175799/does-bash-have-a-hook-that-is-run-before-executing-a-command
+    [ -n "$COMP_LINE" ] && return  # do nothing if completing
+    [ "$BASH_COMMAND" = "$PROMPT_COMMAND" ] && return # don't cause a preexec for $PROMPT_COMMAND
+    if [[ -n "$ZSH_NAME" ]] ; then
+      current_command=`history -1 | sed -e "s/^[ ]*[0-9]*[ ]*//g"`;
+    else
+      current_command=`history 1 | sed -e "s/^[ ]*[0-9]*[ ]*//g"`;
+    fi
+    #preexec "$current_command"
+}
+PROMPT_COMMAND="trap 'preexec_invoke_exec' DEBUG ; _prompt_command"
+if [[ "$ZSH_NAME" = "zsh" ]] ; then
+  add-zsh-hook precmd preexec_invoke_exec
+  add-zsh-hook precmd _prompt_command
+fi
+
+
+
+
+######
+# Bash awesomeness
+######
+
+# Shell acts like vim
+#set -o vi # check out inputrc for extra bindings and if necessary: #export INPUTRC=~/.inputrc
+#
+if test "$BASH" ; then
+  shopt -s autocd  #don't type cd to navigate directories
+  shopt -s cdable_vars # set the bash option so that no '$' is required when using the above facility
+  shopt -s cdspell #cd command will guess misspelled directories
+  shopt -s extglob #ability to use pattern matching like *(pattern1|pattern2) and ?(...) !(...) @(...)
+  shopt -s globstar # ** globs all files, sub-files and subdirectories
+  shopt -s lithist #multi-line commands are saved to history with newlines rather than semi-colons
+  shopt -s checkwinsize #update the values of LINES and COLUMNS after each cmd
+fi
+
+
+# cd tricks from hayne.net/MacDev/Bash/aliases.bash
+#EX:
+#  $ save hi # saves hi=$PWD to a file ~/.dirs
+#  $ sdirs # sources ~/.dirs
+#  $ cd hi # note: 'shopt -s cdable_vars' is set above
+alias sdirs='source ~/.dirs'
+alias show='cat ~/.dirs'
+function save ()
+{
+ sed --regexp-extended "/^$@$/d" ~/.dirs > ~/.dirs1; \mv ~/.dirs1 ~/.dirs; echo "$@"=\"`pwd`\" >> ~/.dirs; source ~/.dirs ; 
+}
+
+# stop XOFF and XON being sent from the keyboard via <C-s> and <C-q>
+# but still allowing other software to send the commands.
+# useful for vim-ipython plugin and anything that binds to <C-s>
+stty ixoff -ixon
+
