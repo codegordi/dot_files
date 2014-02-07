@@ -3,6 +3,9 @@
 # dir stuff
 alias la="ls -laph"
 # alias gw="ssh <gateway server>"
+alias lssimlinks="ls -l ~/.*|grep '\->'"
+
+
 
 #backup
 ## TODO : Install local Dropbox (?)
@@ -27,7 +30,10 @@ alias norris='echo "    \\  Chuck Norris never goes to the dentist because his t
              His enemies never go to the dentist because they have no teeth."'
 
 # python
-alias ipy="ipython"
+alias ipy="ipython" # /Users/christinagutierrez/.virtualenvs/ds/bin/ipython
+alias ipyng='ipython_nogui' # run ipython w/out event loops (a.k.a. "guis" in weird ipython parlance) path /"/"/"/"/"/ipython_nogui
+alias ipynb='ipyng notebook' # recall : 'gui' is iPython nickname for event loop
+alias ipyconlink='ipyng console --existing' # link ipython console session with open NB session
 
 PYTHONPATH=~/ds:$PYTHONPATH
 
