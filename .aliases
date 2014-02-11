@@ -6,7 +6,6 @@ alias la="ls -laph"
 alias lssimlinks="ls -l ~/.*|grep '\->'"
 
 
-
 #backup
 ## TODO : Install local Dropbox (?)
 #alias backup-library='rsync  -av  --stats ~/Library ~/Dropbox/Library-$(date +%s)'
@@ -14,7 +13,8 @@ alias lssimlinks="ls -l ~/.*|grep '\->'"
 # git
 alias glog='git log --decorate --color'
 alias gloga='glog --author=cgutierrez'
-alias gstat='git status' # --decorate --color'
+alias gstat='git status' 
+alias gsquash='git rebase -i HEAD~'  # don't forget to serve parm LINES - # of commits back in squash
 alias gpush='git push --rebase'
 alias gpushum='gpush upstream master'
 
