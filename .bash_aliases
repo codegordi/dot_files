@@ -6,7 +6,7 @@ alias la="ls -laph"
 
 # grep
 alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
+alias egrep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 
 # python
