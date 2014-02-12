@@ -20,7 +20,7 @@ alias gpushum='gpush upstream master'
 
 # grep
 alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
+alias egrep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 
 # misc
@@ -38,4 +38,4 @@ alias ipyconlink='ipyng console --existing' # link ipython console session with 
 
 PYTHONPATH=~/ds:$PYTHONPATH
 
-## >>> from here down moved back to dot_files/bash_sailthru
+## >>> from here moved back to dot_files/bash_sailthru
