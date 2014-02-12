@@ -7,6 +7,7 @@
 "# NOTE : quickstart vundle w > git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
 set nocompatible              " be iMproved
+set backspace=2               " permit backspace; used in conjunction w ^above set
 filetype off                  " required!
 
 "# added per https://github.com/wavded/vim-stylus/issues/26#issuecomment-13114948
