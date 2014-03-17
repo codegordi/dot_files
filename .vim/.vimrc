@@ -57,6 +57,8 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'troydm/easybuffer.vim'
 Bundle 'jnurmine/Zenburn'
 Bundle 'mileszs/ack.vim'
+Bundle pep8
+
 
 "## TODO:
 "://github.com/klen/python-mode#documentationet g:neosnippet#snippets_directory='~/.vim/snippets/'

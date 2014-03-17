@@ -11,7 +11,7 @@ alias lssimlinks="ls -l ~/.*|grep '\->'"
 #alias backup-library='rsync  -av  --stats ~/Library ~/Dropbox/Library-$(date +%s)'
 
 # git
-alias glog='git log --decorate --color'
+alias glog='git log --decorate --color --graph'
 alias gloga='glog --author=cgutierrez'
 alias gstat='git status' 
 alias gsquash='git rebase -i HEAD~'  # don't forget to serve parm LINES - # of commits back in squash
