@@ -3,7 +3,7 @@
 # dir stuff
 alias la="ls -laph"
 # alias gw="ssh <gateway server>"
-alias lssimlinks="ls -l ~/.*|grep '\->'"
+alias lssymln="ls -l ~/.*|grep '\->'"
 
 
 #backup
