@@ -2,10 +2,6 @@
 # ENV VARS
 ######
 
-### cmg : copied over from Alex Gaudio .bash_extras
-### : %s/alex/christina/g
-### : %s/alexgaudio/christinagutierrez/g
-
 export CDPATH="~:$CDPATH"
 export EDITOR=vim
 export HISTFILESIZE=10000
@@ -129,7 +125,7 @@ _my_ps1() {
   fi
 
   # am I currently logged in as my default user?
-  me=(me christina christinagutierrez)
+  me=(me christina cgutierrez)
   local isme="$(grep " "$(whoami)" " <(echo ${me[@]:0}) >/dev/null ; echo $?)"
   local imposter="\$(if [[ ""$isme"" -ne "0" ]]; then echo \"${purple}($(whoami)) | \"; fi )"
 
@@ -187,7 +183,6 @@ if [[ "$ZSH_NAME" = "zsh" ]] ; then
   add-zsh-hook precmd preexec_invoke_exec
   add-zsh-hook precmd _prompt_command
 fi
-
 
 
 

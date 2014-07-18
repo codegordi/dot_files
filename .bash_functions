@@ -1,12 +1,10 @@
 
-# cmg : copied over from Alex's .bash_functions; some ag-specific stuff commented out
-# cf. alexgaudio.com
 
-#function ag
+#function djcmg
 #{
-#    workon alexgaudio
-#    ( cd ~/.priv/projects/django/alexgaudio && ./dmanage.py runserver )
-#    cd ~/.priv/projects/django/alexgaudio
+#    workon cgutierrez
+#    ( cd ~/.priv/projects/django/cgutierrez && ./dmanage.py runserver )
+#    cd ~/.priv/projects/django/cgutierrez
 #}
 
 ####
