@@ -1,10 +1,13 @@
 ## .bashrc
 
-## I hold the following 3 commands in my .profile (MacOS); you may choose to leave here
+## I hold the following 5 commands in my .profile (MacOS); you may choose to leave here
 #export PATH=/usr/local/bin:$PATH
 
-#export VIRTUALENVWRAPPER_PYTHON="/usr/local/bin/python"
+#nano ~/.bashrc    
 #source /usr/local/bin/virtualenvwrapper.sh
+#export VIRTUALENVWRAPPER_PYTHON="/usr/local/bin/python"
+#export WORKON_HOME=$HOME/.virtualenvs
+
 
  source_files() {
    if [ -f "$HOME/.bash_profile" ] ; then
@@ -16,8 +19,8 @@
        . ~/.bash_aliases
        . ~/.bash_extras
        . ~/.bash_functions
-       if [ -f "$HOME/.bash_<org>" ] ; then  # UPDATE <org>
-         . ~/.bash_<org>
+       if [ -f "$HOME/.bash_rtk" ] ; then  # UPDATE <org>
+         . ~/.bash_rtk
        fi
        ~/.aliases
    fi
