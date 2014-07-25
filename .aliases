@@ -36,6 +36,5 @@ alias ipyng='ipython_nogui' # run ipython w/out event loops (a.k.a. "guis" in we
 alias ipynb='ipyng notebook --pylab=inline' # enable graphics usage w/in Notebook
 alias ipyconlink='ipyng console --existing' # link ipython console session with open NB session
 
-PYTHONPATH=~/ds:$PYTHONPATH
+#PYTHONPATH=~/my_venv:$PYTHONPATH
 
-## >>> from here moved back to dot_files/bash_sailthru

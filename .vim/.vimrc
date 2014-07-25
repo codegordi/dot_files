@@ -24,7 +24,7 @@ endif
 
 "# start original gmarik/vundle .vimrc
 set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call vundle#rc()  " no qa
 
 " let Vundle manage Vundle
 " required! 
@@ -46,7 +46,8 @@ Bundle 'tomtom/tlib_vim'
 " Code Completions
 "------------------
 Bundle 'Shougo/neocomplcache'
-Bundle 'mattn/zencoding-vim'
+Bundle 'mattn/emmet-vim' 
+"^ used to be :'mattn/zencoding-vim'
 Bundle 'tpope/vim-surround'
 Bundle 'ciaranm/detectindent'
 Bundle 'scrooloose/nerdtree'
@@ -57,7 +58,7 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'troydm/easybuffer.vim'
 Bundle 'jnurmine/Zenburn'
 Bundle 'mileszs/ack.vim'
-Bundle pep8
+"# Bundle pep8  # noqa
 
 
 "## TODO:
@@ -90,7 +91,7 @@ echo ""
 endif
 " Setting up Vundle - the vim plugin bundler END
 
-filetype plugin indent on     " required!
+filetype plugin indent on     | " required!
 "# from https://github.com/wavded/vim-stylus/issues/26#issuecomment-13114948
 "#colorscheme xoria256
 colorscheme Zenburn

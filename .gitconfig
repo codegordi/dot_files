@@ -1,7 +1,7 @@
 [core]
 	editor = vim
 [user]
-	name = Christina G
-	email = <redacted>
+	name = cgutierrez
+	email = cgutierrez@cgutierrez.local
 [merge]
 	tool = kdiff3

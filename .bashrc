@@ -19,10 +19,10 @@
        . ~/.bash_aliases
        . ~/.bash_extras
        . ~/.bash_functions
+       . ~/.aliases
        if [ -f "$HOME/.bash_rtk" ] ; then  # UPDATE <org>
          . ~/.bash_rtk
        fi
-       ~/.aliases
    fi
   }
   source_files
