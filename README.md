@@ -9,6 +9,7 @@ Following files are symlinked to ~ :
 * .bash_aliases
 * .bash_functions
 * .bash_extras
+* .vim/.vimrc
 
 Following files are NOT symlinked to ~ due to content sensitivity:
 * .bashrc
