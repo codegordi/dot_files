@@ -58,6 +58,11 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'troydm/easybuffer.vim'
 Bundle 'jnurmine/Zenburn'
 Bundle 'mileszs/ack.vim'
+"#Plugin 'derekwyatt/vim-sbt'
+"#Plugin 'derekwyatt/vim-scala'
+Plugin 'derekwyatt/vim-npl'
+Plugin 'derekwyatt/vim-protodef'
+
 "# Bundle pep8  # noqa
 
 
@@ -102,6 +107,7 @@ set tabstop=2
 set shiftwidth=2
 set cindent
 set virtualedit=all
+set laststatus=2
 autocmd BufNewFile,BufRead *.jade set filetype=jade
 autocmd BufNewFile,BufRead *.styl set filetype=styl
 autocmd BufNewFile,BufRead *.json set filetype=json

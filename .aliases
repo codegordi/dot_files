@@ -4,7 +4,7 @@
 alias la="ls -laph"
 # alias gw="ssh <gateway server>"
 alias lssymln="ls -l ~/.*|grep '\->'"
-
+alias dfp='df -hP . | tail -1'
 
 #backup
 ## TODO : Install local Dropbox (?)

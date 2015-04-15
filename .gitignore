@@ -1,0 +1,27 @@
+
+## from Octocat @ github
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+
+# R session & data files #
+##########################
+.RData
+.Rhistory
+
+
+# Haskell object & interface files #
+# > (should be in ~/bin)           #
+# < (; use -outputdir w ghc -o)    #
+# > (; or _better_ use cabal)      #
+####################################
+.o
+.hi

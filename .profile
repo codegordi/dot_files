@@ -2,8 +2,14 @@
 # make sure user-installed binaries take precedence
 export PATH=/usr/local/bin:$PATH
 
+# haskell platform executables
+export PATH="$HOME/Library/Haskell/bin:$PATH"
+
 # added by Anaconda 2.1.0 installer
 export PATH="/Users/cgutierrez/anaconda/bin:$PATH"
+
+# added for EC2 tools access
+export JAVA_HOME=$(/usr/libexec/java_home)
 
 ## move to using conda : see Continuum docs
 ## note : will get venv>>workon error from .bash_extras
