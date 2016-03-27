@@ -1,6 +1,6 @@
 dot_files
 =========
-# Christina Gutierrez
+# C. Gutierrez
 
 Config files (MacOS/Unix/Linux)
 
