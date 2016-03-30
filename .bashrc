@@ -5,14 +5,16 @@
 
 #nano ~/.bashrc    
 #source /usr/local/bin/virtualenvwrapper.sh
-#export VIRTUALENVWRAPPER_PYTHON="/usr/local/bin/python"
-#export WORKON_HOME=$HOME/.virtualenvs
+source ~/.local/bin/virtualenvwrapper.sh
+export VIRTUALENVWRAPPER_PYTHON="/usr/local/bin/python"
+export WORKON_HOME=$HOME/.virtualenvs
 
 
  source_files() {
-   if [ -f "$HOME/.bash_profile" ] ; then
-     . ~/.bash_profile
-   fi
+   ## some linux env may be set up to read .bashrc or other e.g. .profile 1st
+   #if [ -f "$HOME/.bash_profile" ] ; then
+   #  . ~/.bash_profile
+   #fi
    local sources
    [ -n "$BASH" -o -n "$ZSH_NAME" ]  && sources="1" || sources="0"
    if [ "$sources" = "1" ] ; then
