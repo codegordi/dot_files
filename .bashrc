@@ -4,11 +4,11 @@
 #export PATH=/usr/local/bin:$PATH
 
 #nano ~/.bashrc    
-#source /usr/local/bin/virtualenvwrapper.sh
-source ~/.local/bin/virtualenvwrapper.sh
-export VIRTUALENVWRAPPER_PYTHON="/usr/local/bin/python"
+export VIRTUALENVWRAPPER_PYTHON="/usr/local/bin/python3"
+export VIRTUALENVWRAPPER_VIRTUALENV='usr/local/bin/virtualenv'
 export WORKON_HOME=$HOME/.virtualenvs
-
+source /usr/local/bin/virtualenvwrapper.sh
+#source ~/.local/bin/virtualenvwrapper.sh  # for home MBP
 
  source_files() {
    ## some linux env may be set up to read .bashrc or other e.g. .profile 1st
@@ -22,7 +22,7 @@ export WORKON_HOME=$HOME/.virtualenvs
        . ~/.bash_extras
        . ~/.bash_functions
        . ~/.aliases
-       if [ -f "$HOME/.bash_rtk" ] ; then  # UPDATE <org>
+       if [ -f "$HOME/.bash_amzn" ] ; then  # UPDATE <org>
          . ~/.bash_rtk
        fi
    fi
